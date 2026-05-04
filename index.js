@@ -6,6 +6,8 @@ import { dirname, join } from 'path';
 import moment from 'moment';
 import 'colors';
 import { fetchUserProfile, processProfileData } from './utils/api.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 try {
   const __filename = fileURLToPath(import.meta.url);
@@ -38,20 +40,20 @@ let config;
 try {
   const configFile = readFileSync('./config.json', 'utf-8');
   config = JSON.parse(configFile);
-} catch (error) {
-  console.error('❌ Erro ao carregar config.json:', error.message);
-  process.exit(1);
-}
 
-if (!config.token) {
-  console.error('❌ Token não configurado no config.json');
-  process.exit(1);
-}
+// Usa .env no lugar do config
+  config.token = process.env.TOKEN;
+  config.webhook_url = process.env.WEBHOOK_URL;
 
-if (!config.webhook_url) {
-  console.error('❌ Webhook URL não configurada no config.json');
-  process.exit(1);
-}
+  if (!config.token) {
+    console.error('❌ Token não configurado no .env');
+    process.exit(1);
+  }
+
+  if (!config.webhook_url) {
+    console.error('❌ Webhook não configurado no .env');
+    process.exit(1);
+  }
 
 const client = new Client({ checkUpdate: false });
 const webhook = new WebhookClient({ url: config.webhook_url });
