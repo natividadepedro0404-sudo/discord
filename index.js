@@ -37,11 +37,12 @@ try {
 }
 
 let config;
+
 try {
   const configFile = readFileSync('./config.json', 'utf-8');
   config = JSON.parse(configFile);
 
-// Usa .env no lugar do config
+  // Usa .env no lugar do config
   config.token = process.env.TOKEN;
   config.webhook_url = process.env.WEBHOOK_URL;
 
@@ -54,6 +55,11 @@ try {
     console.error('❌ Webhook não configurado no .env');
     process.exit(1);
   }
+
+} catch (error) {
+  console.error('❌ Erro ao carregar config:', error.message);
+  process.exit(1);
+}
 
 const client = new Client({ checkUpdate: false });
 const webhook = new WebhookClient({ url: config.webhook_url });
