@@ -1,8 +1,8 @@
 {
-  "token": "MTA4MTcwNzMwMzcwODkyMTk1OA.GUZjBo.n2wFPILKU3xpX3wvCg9783KApUPBneGe4yUpHg",
+  "token": "MTIwOTkwMTUzNzY0ODk2NzcyNA.G2laEz.GYqMkKW5lwaYRwMvHx7Q1uHqYMq9KOA0wXWHO4",
   "webhook_url": "https://discord.com/api/webhooks/1498046914531430441/IodJhl0f1etHNwpOorEzPxecvXJq7cu_nqOpWnC9U-Q7TnnGJ81D0cTthKbWZ2SgMJei",
   "user_check_delay_ms": 10,
-  "user_scan_batch_size": 3,
+  "user_scan_batch_size": 5,
   "use_proxy": false,
   "proxy": {
     "protocol": "http",
