@@ -1,0 +1,18 @@
+{
+  "token": "MTA4MTcwNzMwMzcwODkyMTk1OA.GUZjBo.n2wFPILKU3xpX3wvCg9783KApUPBneGe4yUpHg",
+  "webhook_url": "https://discord.com/api/webhooks/1498046914531430441/IodJhl0f1etHNwpOorEzPxecvXJq7cu_nqOpWnC9U-Q7TnnGJ81D0cTthKbWZ2SgMJei",
+  "user_check_delay_ms": 10,
+  "user_scan_batch_size": 3,
+  "use_proxy": false,
+  "proxy": {
+    "protocol": "http",
+    "host": "108.165.197.129",
+    "port": 6368,
+    "auth": {
+      "username": "allancpa2",
+      "password": "allancpa22"
+    }
+  }
+}
+
+
