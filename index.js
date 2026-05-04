@@ -12,28 +12,38 @@ dotenv.config();
 try {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = dirname(__filename);
-  const filePath = join(__dirname, 'node_modules', 'discord.js-selfbot-v13', 'src', 'managers', 'ClientUserSettingManager.js');
-  
+
+  const filePath = join(
+    __dirname,
+    'node_modules',
+    'discord.js-selfbot-v13',
+    'src',
+    'managers',
+    'ClientUserSettingManager.js'
+  );
+
   let content = readFileSync(filePath, 'utf-8');
-  
-  if (!content.includes('// PATCH: friend_source_flags - verifica se não é null')) {
-    const patchPattern = /if \('friend_source_flags' in data\) \{[^}]+this\.addFriendFrom = \{[^}]+\};[^}]+\}/s;
-    const patchReplacement = `if ('friend_source_flags' in data) {
-      // PATCH: friend_source_flags - verifica se não é null
-      const flags = data.friend_source_flags || {};
-      this.addFriendFrom = {
-        all: flags.all || false,
-        mutual_friends: flags.all ? true : (flags.mutual_friends || false),
-        mutual_guilds: flags.all ? true : (flags.mutual_guilds || false),
-      };
-    }`;
-    
-    if (patchPattern.test(content)) {
-      content = content.replace(patchPattern, patchReplacement);
-      writeFileSync(filePath, content, 'utf-8');
-    }
-  }
+
+  content = content.replaceAll(
+    'data.friend_source_flags.all',
+    '(data.friend_source_flags?.all || false)'
+  );
+
+  content = content.replaceAll(
+    'data.friend_source_flags.mutual_friends',
+    '(data.friend_source_flags?.mutual_friends || false)'
+  );
+
+  content = content.replaceAll(
+    'data.friend_source_flags.mutual_guilds',
+    '(data.friend_source_flags?.mutual_guilds || false)'
+  );
+
+  writeFileSync(filePath, content, 'utf-8');
+
+  console.log('✅ Patch friend_source_flags aplicado.');
 } catch (error) {
+  console.error('❌ Erro ao aplicar patch:', error.message);
 }
 
 let config;
